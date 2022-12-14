@@ -5,24 +5,24 @@
  */
 package gui;
 
-import dao.DaoStudant;
+import dao.DaoTeacher;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import models.ModelTable;
-import models.Studant;
+import models.Teacher;
 
 /**
  *
  * @author diego
  */
-public class StudantManage extends javax.swing.JFrame {
+public class TeacherManage extends javax.swing.JFrame {
 
     /**
      * Creates new form StudantConsult
      */
-    public StudantManage() {
+    public TeacherManage() {
         initComponents();
     }
 
@@ -55,7 +55,7 @@ public class StudantManage extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Administração de alunos");
+        jLabel1.setText("Administração de professor");
 
         btnSearch.setBackground(new java.awt.Color(255, 255, 255));
         btnSearch.setText("Pesquisar");
@@ -66,7 +66,7 @@ public class StudantManage extends javax.swing.JFrame {
             }
         });
 
-        cbSearchForm.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nome", "Telefone", "Email", "Cidade", "Estado" }));
+        cbSearchForm.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nome", "Matéria", "Horário", "Email", "Telefone", "Cidade", "Estado" }));
         cbSearchForm.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -82,7 +82,7 @@ public class StudantManage extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Nome", "Email", "Telefone", "Cidade", "Estado"
+                "Id", "Nome", "Matéria", "Horário", "Email", "Telefone", "Cidade", "Estado"
             }
         ));
         jScrollPane1.setViewportView(tbUserTable);
@@ -221,19 +221,25 @@ public class StudantManage extends javax.swing.JFrame {
             
             switch (searchForm) {
                 case "Nome":
-                    textForm = "studantName";
+                    textForm = "teacherName";
+                    break;
+                case "Matéria":
+                    textForm = "teacherMatter";
+                    break;
+                case "Horário":
+                    textForm = "teacherSchedule";
                     break;
                 case "Email":
-                    textForm = "studantEmail";
+                    textForm = "teacherEmail";
                     break;
                 case "Telefone":
-                    textForm = "studantPhone";
+                    textForm = "teacherPhone";
                     break;
                 case "Cidade":
-                    textForm = "studantCity";
+                    textForm = "teacherCity";
                     break;
                 case "Estado":
-                    textForm = "studantState";
+                    textForm = "teacherState";
                     break;
             }
             
@@ -245,18 +251,18 @@ public class StudantManage extends javax.swing.JFrame {
         lbSearch.setText(null);
         
         //gambiarra mas funciona
-        setTable("studantId", "null");
+        setTable("teacherId", "null");
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         try {
             int value = (int) tbUserTable.getValueAt(tbUserTable.getSelectedRow(), 0);
 
-            DaoStudant dao = new DaoStudant();
+            DaoTeacher dao = new DaoTeacher();
             dao.delete(value);
             
             JOptionPane.showMessageDialog(rootPane, "Usuário deletado com sucesso");
-            setTable("studantId", "null");
+            setTable("teacherId", "null");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "Selecione uma célula");
             System.out.println(e);
@@ -274,29 +280,35 @@ public class StudantManage extends javax.swing.JFrame {
                 String columnName = null;
                 switch (jcolumnName) {
                     case "Nome":
-                        columnName = "studantName";
+                        columnName = "teacherName";
+                        break;
+                    case "Matéria":
+                        columnName = "teacherMatter";
+                        break;
+                    case "Horário":
+                        columnName = "teacherSchedule";
                         break;
                     case "Email":
-                        columnName = "studantEmail";
+                        columnName = "teacherEmail";
                         break;
                     case "Telefone":
-                        columnName = "studantPhone";
+                        columnName = "teacherPhone";
                         break;
                     case "Cidade":
-                        columnName = "studantCity";
+                        columnName = "teacherCity";
                         break;
                     case "Estado":
-                        columnName = "studantState";
+                        columnName = "teacherState";
                         break;
                 }
                 
                 String newValue = JOptionPane.showInputDialog("Insira o novo valor");
                 if (newValue != null) {
-                    DaoStudant dao = new DaoStudant();
+                    DaoTeacher dao = new DaoTeacher();
                     dao.update(id, columnName, newValue);
 
                     JOptionPane.showMessageDialog(rootPane, "Alterado com sucesso");
-                    setTable("studantId", "null");
+                    setTable("teacherId", "null");
                 }
             }
         } catch (Exception e) {
@@ -305,13 +317,13 @@ public class StudantManage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAlterActionPerformed
   
     private void setTable (String tf, String lb) {
-        DaoStudant dao = new DaoStudant();
+        DaoTeacher dao = new DaoTeacher();
 
         ArrayList data = new ArrayList();
         data = dao.consult(tf, lb);
 
-        Studant user = new Studant();
-        String[] columns = user.getColumns();
+        Teacher teacher = new Teacher();
+        String[] columns = teacher.getColumns();
 
         ModelTable model = new ModelTable(data, columns);
         tbUserTable.setModel(model);
@@ -336,14 +348,22 @@ public class StudantManage extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StudantManage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TeacherManage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StudantManage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TeacherManage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StudantManage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TeacherManage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StudantManage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TeacherManage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -356,7 +376,7 @@ public class StudantManage extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StudantManage().setVisible(true);
+                new TeacherManage().setVisible(true);
             }
         });
     }

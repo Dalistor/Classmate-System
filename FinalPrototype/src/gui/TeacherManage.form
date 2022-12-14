@@ -114,7 +114,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Administra&#xe7;&#xe3;o de alunos"/>
+            <Property name="text" type="java.lang.String" value="Administra&#xe7;&#xe3;o de professor"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="lbSearch">
@@ -136,12 +136,14 @@
         <Component class="javax.swing.JComboBox" name="cbSearchForm">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="5">
+              <StringArray count="7">
                 <StringItem index="0" value="Nome"/>
-                <StringItem index="1" value="Telefone"/>
-                <StringItem index="2" value="Email"/>
-                <StringItem index="3" value="Cidade"/>
-                <StringItem index="4" value="Estado"/>
+                <StringItem index="1" value="Mat&#xe9;ria"/>
+                <StringItem index="2" value="Hor&#xe1;rio"/>
+                <StringItem index="3" value="Email"/>
+                <StringItem index="4" value="Telefone"/>
+                <StringItem index="5" value="Cidade"/>
+                <StringItem index="6" value="Estado"/>
               </StringArray>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -206,9 +208,11 @@
                 <Component class="javax.swing.JTable" name="tbUserTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="6" rowCount="0">
+                      <Table columnCount="8" rowCount="0">
                         <Column editable="true" title="Id" type="java.lang.Object"/>
                         <Column editable="true" title="Nome" type="java.lang.Object"/>
+                        <Column editable="true" title="Mat&#xe9;ria" type="java.lang.Object"/>
+                        <Column editable="true" title="Hor&#xe1;rio" type="java.lang.Object"/>
                         <Column editable="true" title="Email" type="java.lang.Object"/>
                         <Column editable="true" title="Telefone" type="java.lang.Object"/>
                         <Column editable="true" title="Cidade" type="java.lang.Object"/>

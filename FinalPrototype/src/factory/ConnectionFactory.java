@@ -17,7 +17,7 @@ public class ConnectionFactory {
     
     public Connection getConnection() {
         try {
-            return DriverManager.getConnection("jdbc:mysql://localhost/finalPrototype","root","");
+            return DriverManager.getConnection("jdbc:mysql://localhost/finalprototype?useSSL=false","root","senai");
         } catch(SQLException excecao) {
             throw new RuntimeException(excecao);
         }
